@@ -30,14 +30,21 @@
         <ul class="row">
             <li><a href="User_dashboard.php">Home</a></li>
             <li><a href="All_books.php">Books</a></li>
-            <li><a href="service.php">Service</a></li>
-            <li><a href="library_event.php">Message Box</a></li>
+            <li><a href="contact_us.php">Contact</a></li>
+            <li><a href="show_events.php">Message Box</a></li>
         </ul>
         <div class="search">
-            <input type="search" name="search" id="search" placeholder="Search Books"  class="search-box">
+            <div class="search-container" style="position: relative; margin: 20px;">
+                <input id="search" type="text" onkeyup="searchBooks()" placeholder="Type here to search..." oninput="toggleClearButton()">
+                <button id="clearButton" onclick="clearSearch()">&#x2715;</button>
+                <div id="searchResults">
+                    <ul>
+                        <!-- Dynamic search results will be inserted here -->
+                    </ul>
+                </div>
+            </div>   
         </div>
-
-    </div>
+    </div> 
     <br>
     <span>
         <marquee behavior="" direction="" class="text">

@@ -35,7 +35,7 @@ switch ($CASE) {
           foreach($res_book_array as $value){
             $book_name = trim($value['Name']);
             $book_srno = trim($value['ISBN']);
-            $mes .="<li style='cursor: pointer;' class=issue_li overflow-auto' onClick=selectBookSrNo('$book_srno')>" . $book_name."(".$book_srno . ")</li>";
+            $mes .="<li style='cursor: pointer;' class='issue_li overflow-auto' onClick=selectBookSrNo('$book_srno')>" . $book_name."(".$book_srno . ")</li>";
           }
         } 
         $mes .='</ul>';

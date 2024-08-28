@@ -141,6 +141,7 @@ if(isset($_POST['login'])){
             </div>
         </div>
     </main-section>
+    <?php include_once('./user_dashboard/footer.php'); ?>
     <script>
     function myFunction() {
         var x = document.getElementById("pass");

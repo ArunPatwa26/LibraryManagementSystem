@@ -5,15 +5,20 @@
 $id=$_SESSION['id'];
 // echo $id ;
 
-$name = $_POST['name'];
+$name = $_POST['fullname'];
 $email = $_POST['email'];
 $mobile  =$_POST['mobile'];
 $address = $_POST['address'];
+
+
+
 // print_r($_POST); die;
-$query ="update Users set FullName='$name',EmailID='$email',MobileNo='$mobile',Address='$address' where id=".$id; 
+$update_query ="update Users set FullName='$name',EmailID='$email',MobileNo='$mobile',Address='$address' where id=".$id; 
+
+
 //echo $query;
 
-$query_run =mysqli_query($connection,$query)
+$query_run =mysqli_query($connection,$update_query)
 ?>
 <script type="text/javascript">
     alert("Updated Succesfully")

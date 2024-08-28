@@ -64,36 +64,81 @@
                         <h2 >User Registration Form</h2>
                     </div>
                     <form action="register.php" method="post" class="column">
-                        <div class="form-group column">
-                            <label for="name" class=" label-size font-family">Full Name:</label>
-                            <input type="text" id="name" name="name" class="input-box font-family" required>
+                        
+
+                            <div class="form-group column">
+                                <label for="name" class=" label-size font-family">Full Name:</label>
+                                <input type="text" id="name" name="name" class="input-box font-family" required>
+                            </div>
+                            <div class="form-group column">
+                                <label for="email" class=" label-size font-family">Email ID:</label>
+                                <input type="email" id="email" name="email" class="input-box font-family" required>
+                            </div>
+                        
+                        <div class="row">
+
+                            <div class="form-group column">
+                                <label for="pass" class=" label-size font-family">Password:</label>
+                                <input type="password" id="pass" name="password" class="input-box font-family" required>
+                                <img src="public/assests/show.png" alt="" width="40px" onclick="showPassword()"  style="position: relative; bottom: 34px; left: 20vw; height: 30px; width:30px">
+                            </div>
+                            <div class="form-group column">
+                                <label for="pass" class=" label-size font-family">Confirm Password:</label>
+                                <input type="password" id="confirm-pass" name="confirm-password" class="input-box font-family" required>
+                                <img src="public/assests/show.png" alt="" width="40px" onclick="showconfirmPassword()"  style="position: relative; bottom: 34px; left: 20vw; height: 30px; width:30px">
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group column">
+                                <label for="phoneno" class=" label-size font-family">Mobile Number:</label>
+                                <input type="text" id="phoneno" name="phoneno" class="input-box font-family" required>
+                            </div>
+                            <div class="form-group column">
+                                <label for="country" class=" label-size font-family">Country:</label>
+                                <input type="text" id="country" name="country" class="input-box font-family" required>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group column">
+                                <label for="dob" class=" label-size font-family">Date Of Birth:</label>
+                                <input type="date" id="dob" name="country" class="input-box font-family" required>
+                            </div>
+                            <div class="form-group column">
+                                <label for="Age" class=" label-size font-family">Age:</label>
+                                <input type="number" id="Age" name="age" class="input-box font-family" required>
+                            </div>
                         </div>
                         <div class="form-group column">
-                            <label for="email" class=" label-size font-family">Email ID:</label>
-                            <input type="email" id="email" name="email" class="input-box font-family" required>
-                        </div>
-                        <div class="form-group column">
-                            <label for="pass" class=" label-size font-family">Password:</label>
-                            <input type="password" id="pass" name="password" class="input-box font-family" required>
-                            <img src="public/assests/show.png" alt="" width="40px" onclick="showPassword()"  style="position: relative; bottom: 34px; left: 49vw; height: 30px; width:30px">
-                        </div>
-                        <div class="form-group column">
-                            <label for="phoneno" class=" label-size font-family">Mobile Number:</label>
-                            <input type="text" id="phoneno" name="phoneno" class="input-box font-family" required>
-                        </div>
+                                <label for="state" class=" label-size font-family">State:</label>
+                                <input type="text" id="state" name="state" class="input-box font-family" required>
+                            </div>
+                        
                         <div class="form-group column">
                             <label for="address" class=" label-size font-family">Address:</label>
-                           <textarea rows="4" cols="20" name="address" class="font-family textarea"></textarea>
+                           <textarea rows="2" cols="10" name="address" class="font-family textarea"></textarea>
                         </div>
+
                         <button class="Register-button font-family ">Register</button>
                     </form>
                 </div>
             </div>
         </div>
     </main-section>
+    <?php include_once('./user_dashboard/footer.php'); ?>
     <script>
     function showPassword() {
         var x = document.getElementById("pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    function showconfirmPassword() {
+        var x = document.getElementById("confirm-pass");
         if (x.type === "password") {
             x.type = "text";
         } else {

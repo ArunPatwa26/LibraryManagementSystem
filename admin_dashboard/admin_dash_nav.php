@@ -46,6 +46,7 @@
             </div>
         </li>
         <li class="list"><a href="view_issuebook.php" class="text-decoration font-family ">Issue Books</a></li>
+        <li class="list" style="margin:0px 15px"><a href="send_Message.php" class="text-decoration font-family ">Add Event</a></li>
     
     </ul>
         

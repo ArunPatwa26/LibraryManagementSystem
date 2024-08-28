@@ -30,8 +30,8 @@
         <ul class="row">
             <li><a href="User_dashboard.php">Home</a></li>
             <li><a href="All_books.php">Books</a></li>
-            <li><a href="service.php">Service</a></li>
-            <li><a href="library_event.php">Message Box</a></li>
+            <li><a href="contact_us.php">Contact</a></li>
+            <li><a href="show_events.php">Message Box</a></li>
         </ul>
 
     </div>
