@@ -4,14 +4,14 @@ include '../db.php';
 if (isset($_GET['query'])) {
     $search_query = mysqli_real_escape_string($connection, $_GET['query']);
 
-    $user_query = "SELECT * FROM Books WHERE 
+    $book_query = "SELECT * FROM Books WHERE 
                    bookname LIKE '%$search_query%' OR 
                    authorname LIKE '%$search_query%' OR 
                    id LIKE '%$search_query%' OR 
                    booksrno LIKE '%$search_query%' OR 
                    booktype LIKE '%$search_query%'";
 
-    $query_run = mysqli_query($connection, $user_query);
+    $query_run = mysqli_query($connection, $book_query);
     
     if (mysqli_num_rows($query_run) > 0) {
         echo '<ul>';

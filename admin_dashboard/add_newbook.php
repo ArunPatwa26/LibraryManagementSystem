@@ -196,95 +196,213 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/user_dashboard.css">
-    <title>Admin dashboard</title>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #17a2b8;
+            color: white;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            width: fit-content;
+        }
+
+        form {
+            max-width: 100%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="file"], 
+        .form-group select, 
+        .form-group textarea {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-group input[type="text"]:focus, 
+        .form-group input[type="file"]:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #17a2b8;
+            background-color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        button.update-button {
+            background-color: #17a2b8;
+            color: white;
+            width: 90%;
+            padding: 0px 0px;
+            height: 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 50px;
+        }
+
+        button.update-button:hover {
+            background-color: #138496;
+        }
+
+        span {
+            display: block;
+            margin-top: 5px;
+            color: red;
+            font-size: 18px;
+        }
+
+        marquee {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        a.text-decoration-b {
+            text-decoration: none;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        a.text-decoration-b:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-<?php include_once('admin_navbar.php'); ?>
-<?php include_once('admin_dash_nav.php'); ?>
-<span>
+    <?php include_once('admin_navbar.php'); ?>
+    <?php include_once('admin_dash_nav.php'); ?>
+    
+    <span>
         <marquee behavior="" direction="" class="text">
-            This is Library Management System Library opens at 8.00 AM and close at 8.00 PM 
+            This is Library Management System. Library opens at 8.00 AM and closes at 8.00 PM 
         </marquee>
-        <span><a href="admin_dashboard.php" class="font-family text-decoration-b" style="margin:20px 0px; position:relative; left: 88vw;  color:blue; font-size:18px;">/Home</a></span>
-        <h1 class="font-family" style="background-color:#17a2b8; width:1100px; color:white; margin:20px auto; text-align:center; height:50px; padding:0px 0px; border-radius:10px;">Add Books</h1>
+        <span>
+            <a href="admin_dashboard.php" class="font-family text-decoration-b" style="margin: 20px 0px; position: relative; left: 88vw; color: blue; font-size: 18px;">/Home</a>
+        </span>
+        <h1 class="font-family" style="background-color:#17a2b8; width:1100px; color:white; margin:20px auto; text-align:center; height:50px; padding:0px 0px; border-radius:10px;">Add New book</h1>
 
-        <main-section class="column">
-        <div class="column view-profile">
+        <!-- <main-section class="column"> -->
+            <div class="column view-profile">
                 <form action="<?php echo htmlentities($_SERVER['PHP_SELF']);?>" class="column" method="post" enctype="multipart/form-data">
-                    <div class="form-group column ">
-                        <label  class="font-light label-size left font-family  from-label"> Book Title:</label>
-                        <input type="text" class="input-box font-family"  name="bookname" value="<?php echo $name;?>">
-                        <span style="color:red;"><?php echo $error_name; ?></span>
-                    </div>
-                    <div class="form-group column">
-                    <label  class="font-light label-size left font-family  from-label"> Book Type:</label>
-                        <div class="col-sm-5">
-                        <select class="custom-select" name="booktype" id="booktype" style="width: 800px; height: 45px; border-radius: 6px; padding: 0px 10px;">
-                            <option value="">Select Book Type</option>
-                        
-                        <?php
-                            $user_query="select * from Category";
-                            $option_query_run=mysqli_query($connection,$user_query);
-                            while($row=mysqli_fetch_assoc($option_query_run)){ ?>
-                                <option value="<?php echo $row['Cat_Name']; ?>" <?=$type ==$row['Cat_Name'] ? 'selected="selected"' : '' ?>><?php echo $row['Cat_Name']; ?></option>
-                       
-                        <?php } ?>
-
-                        </select>
-                    </div>
-                    <span style="color:red;"><?php echo $error_type; ?></span>
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">Author name:</label>
-                        <input type="text" class="input-box font-family"  name="authorname">
-                        <span style="color:red;"><?php echo $error_authname; ?></span>
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">Book ISBN:</label>
-                        <input type="text" class="input-box font-family"  name="booksrno">
-                        <span style="color:red;"><?php echo $error_booksrno; ?></span>
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">No Of Books:</label>
-                        <div class="col-sm-5">
-                <select class="custom-select"  name="availablebook" id="availablebook" style="width: 800px; height: 45px; border-radius: 6px; padding: 0px 10px;">
-                     <option value="">Select Book Available</option>
-                     <?php for($i =1;$i<=100;$i++) : ?>
-                        <option value="<?=$i;?>"> <?=$i;?></option>
-                        <?php endfor;?>
-                        
-                  </select>
-                </div>
-                <span style="color:red;"><?php echo $error_availablebook; ?></span>
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">Upload Book Image:</label>
-                        <input type="file" class="input-box font-family" name="bookimage" style="margin:4px 0px; padding:8px 10px;">
-                        <span style="color:red;"><?php echo $error_image; ?></span>
-                        
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">Book Publisher:</label>
-                        <input type="text" class="input-box font-family" name="bookpublisher">
-                        <span style="color:red;"><?php echo $error_publisher; ?></span>
-                    </div>
-                    <div class="form-group column " >
-                        <label  class="font-light label-size left font-family">Books Summary:</label>
-                        <div class="col-sm-5">
-                    <textarea class="form-control"  style="height: 238px;" id="booksummary" name="booksummary" placeholder="Enter Summary"></textarea>
                     
-                </div>
-                <span style="color:red;"><?php echo $error_booksummary; ?></span>
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family from-label">Book Title:</label>
+                        <input type="text" class="input-box font-family" name="bookname" value="<?php echo $name;?>">
+                        <span><?php echo $error_name; ?></span>
                     </div>
-                   
+
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family from-label">Book Type:</label>
+                        <select class="custom-select" name="booktype" id="booktype">
+                            <option value="">Select Book Type</option>
+                            <?php
+                                $user_query="select * from Category";
+                                $option_query_run=mysqli_query($connection,$user_query);
+                                while($row=mysqli_fetch_assoc($option_query_run)){ ?>
+                                    <option value="<?php echo $row['Cat_Name']; ?>" <?=$type ==$row['Cat_Name'] ? 'selected="selected"' : '' ?>><?php echo $row['Cat_Name']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span><?php echo $error_type; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family">Author Name:</label>
+                        <input type="text" class="input-box font-family" name="authorname">
+                        <span><?php echo $error_authname; ?></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="font-light label-size left font-family">Book ISBN:</label>
+                            <input type="text" class="input-box font-family" name="booksrno">
+                            <span><?php echo $error_booksrno; ?></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-light label-size left font-family">Upload Book Image:</label>
+                            <input type="file" class="input-box font-family" name="bookimage" style="margin: 4px 0px; padding: 8px 10px;">
+                            <span><?php echo $error_image; ?></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family">No Of Books:</label>
+                        <select class="custom-select" name="availablebook" id="availablebook">
+                            <option value="">Select Book Available</option>
+                            <?php for($i = 1; $i <= 100; $i++) : ?>
+                                <option value="<?=$i;?>"> <?=$i;?></option>
+                            <?php endfor;?>
+                        </select>
+                        <span><?php echo $error_availablebook; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family">Book Publisher:</label>
+                        <input type="text" class="input-box font-family" name="bookpublisher">
+                        <span><?php echo $error_publisher; ?></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="font-light label-size left font-family">Book Summary:</label>
+                        <textarea class="form-control" id="booksummary" name="booksummary" placeholder="Enter Summary"></textarea>
+                        <span><?php echo $error_booksummary; ?></span>
+                    </div>
+
                     <button class="update-button font-family">Add Book</button>
-        </form>
-        </div>
-
-    </main-section>
-
-
-        
-</span>
+                </form>
+            </div>
+        </main-section>
+    </span>
 </body>
 </html>

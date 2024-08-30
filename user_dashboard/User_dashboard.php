@@ -2,6 +2,7 @@
 include('../check_session.php');
 include '../db.php';
 $id = $_SESSION['id'];
+$email=$_SESSION['email'];
 
 $user_name="";
 $user_email = "";
@@ -9,7 +10,7 @@ $user_mobile="";
 $user_address="";
 
 // Fetch user details
-$query = "SELECT * FROM Users WHERE EmailID = '$_SESSION[email]'";
+$query = "SELECT * FROM Users WHERE id ='$_SESSION[id]'";
 $query_run = mysqli_query($connection, $query); 
 while($row = mysqli_fetch_assoc($query_run)){
     $user_name = $row['FullName'];
@@ -47,6 +48,7 @@ $query_run = mysqli_query($connection, $book_query);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/user_dashboard.css">
 </head>
+
 <body>
     <?php include_once('user_navbar.php'); ?>
     <main-section1>

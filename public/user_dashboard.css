@@ -756,5 +756,114 @@ main-section .text-summary p{
 .button-not-available:hover {
     background-color: #c82333; /* Darker red on hover */
 }
+.main-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.profile-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+}
+
+.form-input, .form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.form-input:disabled, .form-select:disabled {
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+.form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    resize: vertical;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.form-textarea:disabled {
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-column {
+    flex: 1;
+}
+
+.form-row > .form-group {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row > .form-group {
+        flex: none;
+    }
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.text-center {
+    text-align: center;
+}
 
 

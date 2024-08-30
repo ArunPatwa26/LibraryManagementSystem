@@ -65,4 +65,15 @@ function get_admin_count(){
     }
     return($admin_count);
 }
+// Number of events Count
+function get_events_count(){
+    $connection = mysqli_connect("localhost","root","root");
+    $db =mysqli_select_db($connection,"library");
+    $query="select count(*) as event_count from notification_box";
+    $query_run=mysqli_query($connection,$query);
+    while($row =mysqli_fetch_assoc($query_run)){
+        $event_count=$row['event_count'];
+    }
+    return($event_count);
+}
 ?>

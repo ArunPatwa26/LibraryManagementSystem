@@ -9,7 +9,7 @@ $user_mobile="";
 $user_address="";
 
 // Fetch user details
-$query = "SELECT * FROM Users WHERE EmailID = '$_SESSION[email]'";
+$query = "SELECT * FROM Users WHERE id ='$_SESSION[id]'";
 $query_run = mysqli_query($connection, $query); 
 while($row = mysqli_fetch_assoc($query_run)){
     $user_name = $row['FullName'];

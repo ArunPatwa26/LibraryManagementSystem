@@ -127,7 +127,7 @@ session_start();
                             <input type="checkbox" onclick="myFunction()" style="margin: 8px 3px;">Show Password
                         </div>
                         
-                        <span><button class="Register-button font-family" style="    margin: -3px 23vw" name="login">Login</button></span>
+                        <span><button class="Register-button font-family"  name="login">Login</button></span>
                     </form>
                     
                 </div>

@@ -51,12 +51,12 @@ while($row =mysqli_fetch_assoc($query_run)){
 </span>
 <span><a href="admin_dashboard.php" class="font-family text-decoration-b" style="margin:20px 0px; position:relative; left: 88vw;  color:blue; font-size:18px;">/Home</a></span>
 <h1 class="font-family" style="background-color:#17a2b8; width:1100px; color:white; margin:40px auto; text-align:center; height:50px; padding:0px 0px; border-radius:10px;">Manage Users</h1>
-<button class="update-button font-family" style="position:relative; left:82vw; margin-bottom:20px; padding:-4px 10px;"><a href="add_newbook.php" class="text-decoration" style="padding:6px 6px;">Add Users</a></button>
+<button class="update-button font-family" style="position:relative; left:82vw; margin-bottom:20px; padding:-4px 10px;"><a href="add_users.php" class="text-decoration" style="padding:6px 6px;">Add Users</a></button>
 <section-1>
     <div class="row table-center table">
         <form action="" class="row table-center">
         <?php
-                    $user_query="select * from Users";
+                    $user_query="select * from myprofile";
                  $book_query_run=mysqli_query($connection,$user_query);
             
             
@@ -81,7 +81,7 @@ while($row =mysqli_fetch_assoc($query_run)){
                         <td><?php echo($row['MobileNo']); ?></td>
                         <td><?php echo($row['Address']); ?></td>
                         <td><?php echo($row['password']); ?></td>
-                        <td style="padding:20px 10px"><a href="edit_user.php?bn=<?php echo $row['ID']; ?>" class="text-decoration edit-btn font-family">Edit</a><a href="delete_user.php?bn=<?php echo $row['ID']?>" class="text-decoration delete-btn font-family" >Delete</a></td>
+                        <td style="padding:20px 10px"><a href="edit_user.php?bn=<?php echo $row['EmailID']; ?>" class="text-decoration edit-btn font-family">Edit</a><a href="delete_user.php?bn=<?php echo $row['EmailID']?>" class="text-decoration delete-btn font-family" >Delete</a></td>
                         
                     </tr>
                     

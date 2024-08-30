@@ -45,8 +45,19 @@
        
             </div>
         </li>
+        <li  class="list font-family" >
+            <div class="dropdown">
+                <button class="dropbtn font-family  color-black " style="  font-size:20px;">Events
+                     <i class="fa fa-caret-down"></i>
+                </button>
+            <div class="dropdown-content ">
+                <a href="add_events.php">Add New events</a>
+                <a href="view_events.php">Manage Admins</a>
+       
+            </div>
+        </li>
         <li class="list"><a href="view_issuebook.php" class="text-decoration font-family ">Issue Books</a></li>
-        <li class="list" style="margin:0px 15px"><a href="send_Message.php" class="text-decoration font-family ">Add Event</a></li>
+       
     
     </ul>
         

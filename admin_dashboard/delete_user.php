@@ -1,12 +1,13 @@
 <?php 
 include('../check_session.php');
 include '../db.php';
-$book_id="";
+$user_email="";
  if(isset($_GET['bn'])){
-    $user_id = $_GET['bn'];
+    $user_email = $_GET['bn'];
 }
 
-$query="DELETE FROM Users WHERE id=".$user_id;
+$query="DELETE FROM Users WHERE EmailID=".$user_id;
+$query="DELETE FROM myprofile WHERE EmailID=".$user_id;
 $query_run=mysqli_query($connection,$query); 
 
 

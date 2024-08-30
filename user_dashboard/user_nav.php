@@ -29,7 +29,7 @@
     <div class="navbar1 row">
         <ul class="row">
             <li><a href="User_dashboard.php">Home</a></li>
-            <li><a href="All_books.php">Books</a></li>
+            <li><a href="All_books.php">Books Category</a></li>
             <li><a href="contact_us.php">Contact</a></li>
             <li><a href="show_events.php">Message Box</a></li>
         </ul>

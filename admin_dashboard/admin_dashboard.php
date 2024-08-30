@@ -106,7 +106,7 @@ while ($row = mysqli_fetch_assoc($query_run)) {
                 </a>
             </div>
         </div>
-        <div class="cards column" style="margin:20px 0px">
+        <div class="cards row" style="margin:20px 0px">
 
             <div class="card card5 font-family">
                 <a href="view_admins.php" target="_blank" class="text-decoration-b">
@@ -120,6 +120,22 @@ while ($row = mysqli_fetch_assoc($query_run)) {
                         <p style="text-align: center; font-size:20px">
                             
                             View Admins
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="card card6 font-family">
+                <a href="view_events.php" target="_blank" class="text-decoration-b">
+                    <div class="card-header font-family">View Events:</div>
+                    <div class="card-body">
+                        <h1 style="font-size:50px; text-align: center; margin:15px 0px">
+                            <?php echo get_events_count(); ?>
+                            
+                        </h1>
+                        
+                        <p style="text-align: center; font-size:20px">
+                            
+                            View Events
                         </p>
                     </div>
                 </a>
