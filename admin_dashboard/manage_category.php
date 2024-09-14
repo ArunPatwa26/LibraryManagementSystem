@@ -1,5 +1,5 @@
 <?php
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
  require('function.php');
 
@@ -11,7 +11,7 @@ include '../db.php';
 
  $user_query="select * from Category";
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -91,6 +91,7 @@ while($row =mysqli_fetch_assoc($query_run)){
 
     </div>
 </section-1>
+<?php include "../user_dashboard/footer.php"; ?>
 
 </body>
 </html>

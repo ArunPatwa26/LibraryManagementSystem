@@ -2,14 +2,15 @@
  include('../check_session.php');
  include '../db.php';
 
-$id = $_SESSION['id'];
+$id = $_SESSION['userid'];
+// print_r($_SESSION);
 
 $user_name="";
 $user_email = "";
 $user_mobile="";
 $user_address="";
 
-$query="select * from Users where EmailID = '$_SESSION[email]'";
+$query="select * from Users where EmailID = '$_SESSION[useremail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $user_name=$row['FullName'];

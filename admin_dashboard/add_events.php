@@ -1,12 +1,12 @@
 <?php 
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
 $admin_name="";
 $admin_email = "";
 
 
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -15,9 +15,10 @@ while($row =mysqli_fetch_assoc($query_run)){
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 $title=$_POST['title'];
+$date=$_POST['date'];
 $summary=$_POST['summary'];
 //print_r($_POST); die;
-$query="insert into notification_box (title,summary,created_date) values('$title','$summary',Now())";
+$query="insert into notification_box (title,summary,event_date,created_date) values('$title','$summary','$date',Now())";
 
 // echo $query; die;
 $query_run=mysqli_query($connection,$query);
@@ -72,6 +73,10 @@ mysqli_close($connection);
                             <input type="text" id="name" name="title" class="input-box font-family" required>
                         </div>
                         <div class="form-group column">
+                            <label for="name" class=" label-size font-family">Event Date:</label>
+                            <input type="date" id="date" name="title" class="input-box font-family" required>
+                        </div>
+                        <div class="form-group column">
                             <label for="address" class=" label-size font-family">Message:</label>
                            <textarea rows="4" cols="40" name="summary" class="font-family textarea"></textarea>
                         </div>
@@ -81,6 +86,7 @@ mysqli_close($connection);
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
    
 </body>

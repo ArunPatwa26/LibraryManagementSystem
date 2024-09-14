@@ -1,13 +1,13 @@
 <?php
 require('function.php');
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
 $admin_name="";
 $admin_email = "";
 
 
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -99,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
 
         

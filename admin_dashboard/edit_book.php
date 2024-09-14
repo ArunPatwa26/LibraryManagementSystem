@@ -1,8 +1,8 @@
 <?php
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
-$admin_name=$_SESSION['name'];
-$admin_email = $_SESSION['email'];
+$admin_name=$_SESSION['adminname'];
+$admin_email = $_SESSION['adminemail'];
 $name = "";
 $type =  "";
 $authorname = "";
@@ -12,7 +12,7 @@ $booksummary = "";
 $publisher =  "";
 $imageName ="";
 $created_at="";
-$userid =$_SESSION['id'];
+$userid =$_SESSION['adminid'];
  $book_id = 0;
  if(isset($_GET['bn'])){
      $book_id = $_GET['bn'];
@@ -109,7 +109,7 @@ while($row =mysqli_fetch_assoc($query_run)){
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $book_id = $_POST['book_id'];
-    $target_dir = "../public\assests\bookimage";
+    $target_dir = "../public\assests\bookimage/";
     $target_file = $target_dir . basename($_FILES["bookimage"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $booksummary = trim($_POST['booksummary']);
     $publisher =  $_POST['bookpublisher'];
     $imageName =($_FILES["bookimage"]["name"]);
-    $userid =$_SESSION['id'];
+    $userid =$_SESSION['adminid'];
   
     // Correct SQL query syntax
     $query ="update Books set bookname='$name', booktype='$type', authorname='$authorname', availablebook=$availablebook, booksrno='$booksrno', booksummary='$booksummary', bookpublisher='$publisher', bookimage='$imageName', userid=$userid, updated_at=now() where id=".$book_id; 
@@ -303,6 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
 
         

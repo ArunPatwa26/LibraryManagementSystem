@@ -2,9 +2,9 @@
  include('../check_session.php');
  include '../db.php';
 // $_SESSION['id']=$row['ID'];
-$id=$_SESSION['id'];
+$id=$_SESSION['userid'];
 
-$user_email=$_SESSION['email'];
+$user_email=$_SESSION['useremail'];
 print_r($user_email); 
 // echo $id ;
 
@@ -22,8 +22,8 @@ $gender = mysqli_real_escape_string($connection, $_POST['gender']);
 
 
 // print_r($_POST); die;
-$update_reg_query ="update myprofile set FullName='$name', EmailID='$email',MobileNo='$mobile', Address='$address', State='$state', Country='$country', Gender='$gender', DateOfBirth='$dob', Age=$age where EmailID='$user_email'";
-$update_query ="update Users set FullName='$name',EmailID='$email',MobileNo='$mobile',Address='$address' where EmailID='$user_email'"; 
+$update_reg_query ="update myprofile set FullName='$name',MobileNo='$mobile', Address='$address', State='$state', Country='$country', Gender='$gender', DateOfBirth='$dob', Age=$age where EmailID='$user_email'";
+$update_query ="update Users set FullName='$name',MobileNo='$mobile',Address='$address' where EmailID='$user_email'"; 
 
 
 //echo $query;

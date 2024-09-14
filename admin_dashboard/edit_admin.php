@@ -1,7 +1,7 @@
 <?php
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
-$id = $_SESSION['id'];
+$id = $_SESSION['adminid'];
 
 $admin_name="";
 $admin_email = "";
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                     </div>
                     <div class="form-group column " >
                         <label  class="font-light label-size left font-family">EmailID:</label>
-                        <input type="text" class="input-box font-family" value="<?php echo $admin_email ?>" name="email">
+                        <input type="text" class="input-box font-family" value="<?php echo $admin_email ?>" name="email" disabled>
                     </div>
                     <div class="form-group column " >
                         <label  class="font-light label-size left font-family">Phone No:</label>
@@ -117,6 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
 </body>
 </html>

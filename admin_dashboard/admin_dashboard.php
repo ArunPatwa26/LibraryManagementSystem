@@ -1,13 +1,14 @@
 <?php
 require('function.php');
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
+// print_r($_SESSION);
 $admin_name = "";
 $admin_email = "";
 
 
 
-$query = "select * from Admins where EmailID = '$_SESSION[email]'";
+$query = "select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($query_run)) {
     $admin_name = $row['FullName'];
@@ -27,6 +28,7 @@ while ($row = mysqli_fetch_assoc($query_run)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../public/user_dashboard.css">
     <title>Admin dashboard</title>
+
 </head>
 
 <body>
@@ -108,22 +110,7 @@ while ($row = mysqli_fetch_assoc($query_run)) {
         </div>
         <div class="cards row" style="margin:20px 0px">
 
-            <div class="card card5 font-family">
-                <a href="view_admins.php" target="_blank" class="text-decoration-b">
-                    <div class="card-header font-family">View Admins:</div>
-                    <div class="card-body">
-                        <h1 style="font-size:50px; text-align: center; margin:15px 0px">
-                            <?php echo get_admin_count(); ?>
-                            
-                        </h1>
-                        
-                        <p style="text-align: center; font-size:20px">
-                            
-                            View Admins
-                        </p>
-                    </div>
-                </a>
-            </div>
+            
             <div class="card card6 font-family">
                 <a href="view_events.php" target="_blank" class="text-decoration-b">
                     <div class="card-header font-family">View Events:</div>
@@ -145,6 +132,7 @@ while ($row = mysqli_fetch_assoc($query_run)) {
 
             
     </section>
+    <?php include "../user_dashboard/footer.php"; ?>
 </body>
 
 </html>

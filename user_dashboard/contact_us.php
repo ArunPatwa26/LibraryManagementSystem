@@ -1,7 +1,7 @@
 <?php
 include('../check_session.php');
 include '../db.php';
-$id = $_SESSION['id'];
+$id = $_SESSION['userid'];
 
 $user_name="";
 $user_email = "";
@@ -9,7 +9,7 @@ $user_mobile="";
 $user_address="";
 
 // Fetch user details
-$query = "SELECT * FROM Users WHERE id ='$_SESSION[id]'";
+$query = "SELECT * FROM Users WHERE id ='$_SESSION[userid]'";
 $query_run = mysqli_query($connection, $query); 
 while($row = mysqli_fetch_assoc($query_run)){
     $user_name = $row['FullName'];

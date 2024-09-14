@@ -1,3 +1,6 @@
+<?php
+include 'db.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/style1.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="public/style1.css">
+
     <script src="public/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="public/bootbox/bootbox.min.js"></script>
     <script src="public/bootbox/bootbox.locales.min.js"></script>
-   
+
     <title>Library Management System</title>
     <script>
         $(document).on("click", function() {
@@ -25,7 +28,8 @@
             //                     });
         });
     </script>
-    
+
+
 </head>
 
 <body>
@@ -48,7 +52,7 @@
     </nav>
     <br>
     <section class="flex-row main-section">
-   
+
         <div class="part part1 column">
             <div class="heading font-family">
                 <h3>Library Timing</h3>
@@ -84,12 +88,12 @@
                         <label for="email" class="label-size font-family">Email ID:</label>
                         <input type="email" id="email" name="email" class="input-box font-family" required>
                     </div>
-                    <div class="flex-row">
+                    <div class="row">
                         <div class="form-group column input-with-icon">
                             <label for="pass" class="label-size font-family">Password:</label>
                             <input type="password" id="pass" name="password" class="input-box font-family" required>
                             <img src="public/assests/show.png" alt="Show Password" onclick="showPassword('pass')" style="height: 30px; width:30px">
-                           
+
                         </div>
                         <div class="form-group column input-with-icon">
                             <label for="confirm-pass" class="label-size font-family">Confirm Password:</label>
@@ -98,50 +102,61 @@
                             <span id="error-message">Passwords do not match!</span>
                         </div>
                     </div>
-                    <div class="flex-row">
+                    <div class="row">
+                        <div class="form-group column">
+                            <label for="phoneno" class="label-size font-family">Mobile Number:</label>
+                            <input type="text" id="phoneno" name="phoneno" class="input-box font-family" required>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group column">
+                            <label for="dob" class="label-size font-family">Date of Birth:</label>
+                            <input type="date" id="dob" name="dob" class="input-box font-family" required>
+                        </div>
+                        <div class="form-group column">
+                            <label for="age" class="label-size font-family">Age:</label>
+                            <input type="number" id="age" name="age" class="input-box font-family" required>
+                        </div>
+                    </div>
+
                     <div class="form-group column">
-                        <label for="phoneno" class="label-size font-family">Mobile Number:</label>
-                        <input type="text" id="phoneno" name="phoneno" class="input-box font-family" required>
+                        <label for="gender" class="label-size font-family">Gender:</label>
+                        <select id="gender" name="gender" class="input-box font-family" required>
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
                     </div>
                     <div class="form-group column">
                         <label for="country" class="label-size font-family">Country:</label>
-                        <select id="country" name="country" class="input-box font-family" required>
-                            <option value="" disabled selected>Select your country</option>
-                            <option value="United States">United States</option>
-                            <option value="Canada">Canada</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="Australia">Australia</option>
-                            <option value="India">India</option>
-                            <!-- Add more countries as needed -->
+                        <select class="custom-select" name="country" id="country" required>
+                            <option value="">Select country</option>
+                            <?php
+                            $country_query = "SELECT * FROM countries";
+                            $country_query_run = mysqli_query($connection, $country_query);
+                            while ($row = mysqli_fetch_assoc($country_query_run)) { ?>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                            <?php } ?>
                         </select>
                     </div>
-                </div>
-
-                <div class="flex-row">
-                    <div class="form-group column">
-                        <label for="dob" class="label-size font-family">Date of Birth:</label>
-                        <input type="date" id="dob" name="dob" class="input-box font-family" required>
-                    </div>
-                    <div class="form-group column">
-                        <label for="age" class="label-size font-family">Age:</label>
-                        <input type="number" id="age" name="age" class="input-box font-family" required>
-                    </div>
-                </div>
-
-                <div class="form-group column">
-                    <label for="gender" class="label-size font-family">Gender:</label>
-                    <select id="gender" name="gender" class="input-box font-family" required>
-                        <option value="" disabled selected>Select your gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
 
                     <div class="form-group column">
                         <label for="state" class="label-size font-family">State:</label>
-                        <input type="text" id="state" name="state" class="input-box font-family" required>
+                        <select class="custom-select" name="state" id="state" required>
+                            <option value="">Select state</option>
+                        </select>
                     </div>
+
+                    <div class="form-group column">
+                        <label for="city" class="label-size font-family">City:</label>
+                        <select class="c    ustom-select" name="city" id="city" required>
+                            <option value="">Select city</option>
+                        </select>
+                    </div>
+
 
                     <div class="form-group column">
                         <label for="address" class="label-size font-family">Address:</label>
@@ -152,7 +167,7 @@
             </div>
         </div>
     </section>
-    <?php include_once('./user_dashboard/footer.php'); ?>
+    <?php include_once('user_dashboard/footer.php'); ?>
     <script>
         function showPassword(id) {
             var x = document.getElementById(id);
@@ -169,7 +184,7 @@
             var errorMessage = document.getElementById("error-message");
             var passMessage = document.getElementById("pass-message");
 
-    
+
 
             // Password match validation
             if (password !== confirmPassword) {
@@ -181,7 +196,50 @@
 
             return true;
         }
+    
+        $(document).ready(function() {
+            // When the country is selected, fetch the states
+            $('#country').change(function() {
+                var countryID = $(this).val();
+                if (countryID) {
+                    $.ajax({
+                        type: "POST",
+                        url: "get_states.php",
+                        data: {
+                            country_id: countryID
+                        },
+                        success: function(response) {
+                            $('#state').html(response);
+                            $('#city').html('<option value="">Select city</option>'); // Reset city dropdown
+                        }
+                    });
+                } else {
+                    $('#state').html('<option value="">Select state</option>');
+                    $('#city').html('<option value="">Select city</option>');
+                }
+            });
+
+            // When the state is selected, fetch the cities
+            $('#state').change(function() {
+                var stateID = $(this).val();
+                if (stateID) {
+                    $.ajax({
+                        type: "POST",
+                        url: "get_cities.php",
+                        data: {
+                            state_id: stateID
+                        },
+                        success: function(response) {
+                            $('#city').html(response);
+                        }
+                    });
+                } else {
+                    $('#city').html('<option value="">Select city</option>');
+                }
+            });
+        });
     </script>
+
 </body>
 
 </html>

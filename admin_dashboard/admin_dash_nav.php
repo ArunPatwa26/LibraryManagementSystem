@@ -34,17 +34,7 @@
                 <a href="manage_category.php">Manage Category</a>
             </div>
         </li>
-        <li  class="list font-family" >
-            <div class="dropdown">
-                <button class="dropbtn font-family  color-black " style="  font-size:20px;">Admins
-                     <i class="fa fa-caret-down"></i>
-                </button>
-            <div class="dropdown-content ">
-                <a href="add_admins.php">Add New Admins</a>
-                <a href="view_admins.php">Manage Admins</a>
-       
-            </div>
-        </li>
+      
         <li  class="list font-family" >
             <div class="dropdown">
                 <button class="dropbtn font-family  color-black " style="  font-size:20px;">Events

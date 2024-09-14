@@ -1,5 +1,5 @@
 <?php 
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
 $admin_name="";
 $admin_email = "";
@@ -8,25 +8,24 @@ $admin_email = "";
 
 
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
     $admin_email=$row['EmailID'];
 }
 
-$user_email ="";
+$regid ="";
 if(isset($_GET['bn'])){
-    $user_email = $_GET['bn'];
+    $regid = $_GET['bn'];
     // echo $user_email;
 }
 // echo $_GET['bn'];
-$user_query="select * from myprofile where EmailID='$user_email'";
+$user_query="select * from myprofile where id='$regid'";
 $user_query_run=mysqli_query($connection,$user_query); 
 while($row =mysqli_fetch_assoc($user_query_run)){
    $name=$row['FullName'];
    $email=$row['EmailID'];
-   $password=$row['password'];
    $mobileno=$row['MobileNo'];
    $address=$row['Address'];
    $state=$row['State'];
@@ -37,7 +36,7 @@ while($row =mysqli_fetch_assoc($user_query_run)){
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $user_email = $_POST['user_email'];
+    $regid = $_POST['regid'];
     $name = mysqli_real_escape_string($connection, $_POST['name']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
@@ -49,19 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $gender = mysqli_real_escape_string($connection, $_POST['gender']); 
 // echo $user_id;
 // print_r($_POST); die;
-$reg_query = "UPDATE myprofile SET FullName='$name', EmailID='$email', MobileNo='$mobile', Address='$address', State='$state', Country='$country', Gender='$gender', DateOfBirth='$dob', Age=$age WHERE EmailId='$user_email'";
+$reg_query = "UPDATE myprofile SET FullName='$name', EmailID='$email', MobileNo='$mobile', Address='$address', State='$state', Country='$country', Gender='$gender', DateOfBirth='$dob', Age=$age WHERE id='$regid'";
 
-$update_query="update Users set FullName='$name', EmailID='$email', MobileNo='$mobile', Address='$address', password='$password' where EmailID='$user_email'"; 
-if(mysqli_query($connection, $reg_query) && mysqli_query($connection, $update_query)) {
-    echo "<script type='text/javascript'>
-            alert('User Add Successfully..');
-            window.location.href='register_users.php';
-          </script>";
-} else {
-    echo "<script type='text/javascript'>
-            alert('Error: " . mysqli_error($connection) . "');
-            window.location.href='register_user.php';
-          </script>";
+if (mysqli_query($connection, $reg_query)){
+    $last_id = $connection->insert_id;
+    $update_query="update Users set  FullName='$name', EmailID='$email', MobileNo='$mobile', Address='$address' where RegID='$regid'";
+    mysqli_query($connection,$update_query);
+    echo '<script type="text/javascript">
+        alert("User Update Successfully.... ");
+        window.location.href="register_users.php";
+    </script>';
+}
+else {
+    echo "Error: " . mysqli_error($connection);
 }
 
 // Close the connection
@@ -191,14 +190,14 @@ mysqli_close($connection);
         <main-section class="column">
         <div class="column view-profile">
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']);?>" class="column" method="post" enctype="multipart/form-data">
-                <input type="hidden" id="user_email" value="<?=$user_email ?>" name="user_email">
+                <input type="hidden" id="regid" value="<?=$regid ?>" name="regid">
         <div class="form-group column">
                         <label for="name" class="label-size font-family">Full Name:</label>
                         <input type="text" id="name" name="name" class="input-box font-family" value="<?php echo $name; ?>" required>
                     </div>
                     <div class="form-group column">
                         <label for="email" class="label-size font-family">Email ID:</label>
-                        <input type="email" id="email" name="email" class="input-box font-family" value="<?php echo $email; ?>"required>
+                        <input type="email" id="email" name="email" class="input-box font-family" value="<?php echo $email; ?>" required>
                     </div>
                     
                     <div class="row">
@@ -248,7 +247,7 @@ mysqli_close($connection);
 
                     <div class="form-group column">
                         <label for="address" class="label-size font-family">Address:</label>
-                        <textarea rows="6" cols="20" name="address" class="font-family textarea input-box"><?php echo $address; ?></textarea>
+                        <textarea rows="6"  cols="30" name="address" class="font-family textarea input-box"><?php echo $address; ?></textarea>
                     </div>
                         <button class="update-button font-family" style="width:125px; ">Update</button>
                     </form>
@@ -256,6 +255,7 @@ mysqli_close($connection);
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
     <script>
     function showPassword() {

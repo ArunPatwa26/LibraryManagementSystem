@@ -576,7 +576,7 @@ main-section .text-summary p{
 /* Search Baar */
 
 .navbar1 .search .search-container input[type=text]{
-    width: 700px;
+    width: 560px;
     height: 42px;
     position: relative;
     bottom: 22px;
@@ -867,3 +867,29 @@ main-section .text-summary p{
 }
 
 
+.footer{
+    margin-top: 100px;
+    background-color: black;
+    width: 100%;
+    color: white;
+}
+.footer .footer-1,.footer .footer-2,.footer .footer-3{
+    width: 100%;
+    padding: 50px 30px;
+}
+.footer .footer-1 p{
+    padding: 10px 0px;
+    max-width: 400px;
+}
+.footer .footer-2 ul {
+    padding: 10px 0px;
+}
+.footer .footer-3 ul {
+    padding: 10px 0px;
+}
+.footer .footer-2 ul li {
+    padding: 2px 0px;
+}
+.footer .footer-3 ul li {
+    padding: 2px 0px;
+}

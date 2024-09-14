@@ -1,7 +1,9 @@
 <?php
  include('../check_session.php');
  include '../db.php';
-$id = $_SESSION['id'];
+$user_id = $_SESSION['userid'];
+// $user_email = $_SESSION['useremail'];
+//  print_r($_SESSION);
 
 $user_name="";
 $user_email = "";
@@ -13,15 +15,18 @@ $user_dob="";
 $user_age="";
 $user_gender="";
 
-$query="select * from users where ID = '$id'";
+$query="select * from users where ID = '$$user_id'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $user_name=$row['FullName'];
     $user_email=$row['EmailID'];
 }
+echo $user_email;
 
 
-$form_query="select * from myprofile where EmailID ='$user_email'";
+$form_query="select * from myprofile where ID ='$user_id'";
+// echo $form_query;
+// echo $user_id;
 $query_run=mysqli_query($connection,$form_query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $user_name=$row['FullName'];
@@ -158,10 +163,7 @@ while($row =mysqli_fetch_assoc($query_run)){
                     <label for="name" class="form-label">Full Name:</label>
                     <input type="text" id="name" name="name" class="form-input" value="<?php echo $user_name?>" >
                 </div>
-                <div class="form-group">
-                    <label for="email" class="form-label">Email ID:</label>
-                    <input type="email" id="email" name="email" class="form-input" value="<?php echo $user_email?>" >
-                </div>
+              
                 <div class="form-row">
                     <div class="form-group">
                         <label for="phoneno" class="form-label">Mobile Number:</label>
@@ -170,7 +172,7 @@ while($row =mysqli_fetch_assoc($query_run)){
                     <div class="form-group">
                         <label for="country" class="form-label">Country:</label>
                         <select id="country" name="country" class="input-box font-family" required>
-                            <option value="" disabled selected>Select your country</option>
+                            <option value="" disabled selected><?php echo $user_country?></option>
                             <option value="United States">United States</option>
                             <option value="Canada">Canada</option>
                             <option value="United Kingdom">United Kingdom</option>
@@ -193,7 +195,7 @@ while($row =mysqli_fetch_assoc($query_run)){
                 <div class="form-group">
                     <label for="gender" class="form-label">Gender:</label>
                     <select id="gender" name="gender" class="input-box font-family" required>
-                        <option value="" disabled selected>Select your gender</option>
+                        <option value="" disabled selected><?php echo $user_gender?></option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>

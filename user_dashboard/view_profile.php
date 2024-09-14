@@ -1,7 +1,8 @@
 <?php
  include('../check_session.php');
  include '../db.php';
-$id = $_SESSION['id'];
+$id = $_SESSION['userid'];
+$user_email = $_SESSION['useremail'];
 // echo $_SESSION['email'];
 
 $user_name="";

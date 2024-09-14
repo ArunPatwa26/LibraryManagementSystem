@@ -2,7 +2,7 @@
  include('../check_session.php');
  include '../db.php';
 // $_SESSION['id']=$row['ID'];
-$id=$_SESSION['id'];
+$id=$_SESSION['userid'];
 
 
 $password="";
@@ -17,7 +17,7 @@ while($row =mysqli_fetch_assoc($query_run)){
 if($password==$_POST['old_password']){
     $query="update Users set password ='$_POST[new_password]' where id =".$id;
     $query_run =mysqli_query($connection,$query);
-}
+}   
 ?>
 <script type="text/javascript">
     alert("Updated Password Successfully");

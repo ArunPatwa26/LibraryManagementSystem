@@ -1,6 +1,6 @@
 <?php
  require('function.php');
- include('../check_session.php');
+ include('check_admin_session.php');
  include '../db.php';
  $admin_name="";
  $admin_email = "";
@@ -12,7 +12,7 @@
 
  $user_query="select * from Users";
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -56,7 +56,7 @@ while($row =mysqli_fetch_assoc($query_run)){
     <div class="row table-center table">
         <form action="" class="row table-center">
         <?php
-                    $user_query="select * from myprofile";
+                    $user_query="select * from users";
                  $book_query_run=mysqli_query($connection,$user_query);
             
             
@@ -81,7 +81,7 @@ while($row =mysqli_fetch_assoc($query_run)){
                         <td><?php echo($row['MobileNo']); ?></td>
                         <td><?php echo($row['Address']); ?></td>
                         <td><?php echo($row['password']); ?></td>
-                        <td style="padding:20px 10px"><a href="edit_user.php?bn=<?php echo $row['EmailID']; ?>" class="text-decoration edit-btn font-family">Edit</a><a href="delete_user.php?bn=<?php echo $row['EmailID']?>" class="text-decoration delete-btn font-family" >Delete</a></td>
+                        <td style="padding:20px 10px"><a href="edit_user.php?bn=<?php echo $row['RegID']; ?>" class="text-decoration edit-btn font-family">Edit</a><a href="delete_user.php?bn=<?php echo $row['RegID']?>" class="text-decoration delete-btn font-family" >Delete</a></td>
                         
                     </tr>
                     
@@ -92,6 +92,7 @@ while($row =mysqli_fetch_assoc($query_run)){
 
     </div>
 </section-1>
+<?php include "../user_dashboard/footer.php"; ?>
 
 </body>
 </html>

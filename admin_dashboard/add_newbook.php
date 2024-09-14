@@ -1,12 +1,12 @@
 <?php
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
 $admin_name="";
 $admin_email = "";
 
 
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -22,7 +22,7 @@ while($row =mysqli_fetch_assoc($query_run)){
     $booksummary = "";
     $publisher =  "";
     $imageName ="";
-    $userid =$_SESSION['id'];
+    $userid =$_SESSION['userid'];
     $error_name ="";
     $error_type ="";
     $error_image="";
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
   $booksummary = trim(addslashes($_POST['booksummary']));
   $publisher =  $_POST['bookpublisher'];
   $imageName =($_FILES["bookimage"]["name"]);
-  $userid =$_SESSION['id'];
+  $userid =$_SESSION['adminid'];
 
   // Correct SQL query syntax
   $query ="INSERT INTO books (bookname, booktype, authorname, availablebook, booksrno, booksummary, bookpublisher, bookimage, userid, created_at, updated_at) 
@@ -404,5 +404,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             </div>
         </main-section>
     </span>
+    <?php include "../user_dashboard/footer.php"; ?>
 </body>
 </html>

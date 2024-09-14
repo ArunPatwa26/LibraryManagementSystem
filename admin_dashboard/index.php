@@ -2,43 +2,44 @@
 include '../db.php';
 session_start();
 
-                        // session_start();
-    if(isset($_POST['login'])){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $query="select * from Admins where EmailID = '$email'";
-        $query_run=mysqli_query($connection,$query);    
-        while($row =mysqli_fetch_assoc($query_run)){
-        $email_id=$row['EmailID'];
-        $password_1=$row['password'];
-            if($row['EmailID']== $email){
-                if($row['password']== $password){
-                    session_start();
-                    $_SESSION['name']=$row['FullName'];
-                    $_SESSION['id']=$row['ID'];
-                    $_SESSION['email']=$row['EmailID'];
-                    header("Location:admin_dashboard.php");
-                    
-                    
-                }
-                else{
-                    ?>
-                    <br><br><span class="alert-danger font-family">Wrong Password</span>
-                    <?php
-                }
-            }
-            else{
-                ?>
-                
-                    <br><br><span class="alert-danger font-family">Wrong Email</span>
-                    <?php
-        }
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
     
+    // Hash the entered password using sha1 (though it's better to use password_hash)
+    // $password = sha1($password);
+
+    // Query to find the user based on email
+    $query = "SELECT * FROM Admins WHERE EmailID = '$email'";
+    $query_run = mysqli_query($connection, $query);
+
+    // Check if any row is returned
+    if ($row = mysqli_fetch_assoc($query_run)) {
+        // Compare hashed password
+        if ($row['password'] == $password) {
+
+            // Set session variables
+            $_SESSION['adminname'] = $row['FullName'];
+            $_SESSION['adminid'] = $row['ID'];
+            $_SESSION['adminemail'] = $row['EmailID'];
+            if($row['login_type']==1){
+
+                header("Location: ../super_admin_dashboard/super_admin_dashboard.php");
+            }else{
+                header("Location: admin_dashboard.php");
+
+            }
+
+            
+            // Redirect to admin dashboard
+            exit();
+        } else {
+            $emailErr = "Incorrect Password";
+        }
+    } else {
+        $emailErr = "Email not found";
     }
 }
-    
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,6 +114,13 @@ session_start();
                     <div class="text center">
                         <h2 >Admin Login Form</h2>
                     </div>
+                    <h4 style="text-align:center;">
+                        <?php
+                        if (!empty($emailErr)) {
+                            echo $emailErr;
+                        }
+                        ?>
+                    </h4>
                     <form action="" method="post" class="column">
                     
                         <div class="form-group column">
@@ -128,12 +136,16 @@ session_start();
                         </div>
                         
                         <span><button class="Register-button font-family"  name="login">Login</button></span>
+                        <span style="display: block; text-align: center; margin-top: 10px;">
+                            <a href="forgot_password.php" class="text-decoration link font-family" style="color:blue;">Forgot Password?</a>
+                        </span>
                     </form>
                     
                 </div>
             </div>
         </div>
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
     <script>
     function myFunction() {

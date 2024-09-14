@@ -1,12 +1,12 @@
 <?php 
-include('../check_session.php');
+include('check_admin_session.php');
 include '../db.php';
 $admin_name="";
 $admin_email = "";
 
 
 
-$query="select * from Admins where EmailID = '$_SESSION[email]'";
+$query="select * from Admins where EmailID = '$_SESSION[adminemail]'";
 $query_run=mysqli_query($connection,$query); 
 while($row =mysqli_fetch_assoc($query_run)){
     $admin_name=$row['FullName'];
@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $name = mysqli_real_escape_string($connection, $_POST['name']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
+    $password = sha1($password);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
     $mobile = mysqli_real_escape_string($connection, $_POST['phoneno']);
     $state = mysqli_real_escape_string($connection, $_POST['state']);
@@ -27,24 +28,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     // print_r($_POST);  die;
     
     // SQL Queries
-    $reg_query = "INSERT INTO myprofile (FullName, password, EmailID, MobileNo, Address, State, Country, Gender, DateOfBirth, Age, MembershipStart,created_date)
-    VALUES ('$name', '$password', '$email', '$mobile', '$address', '$state', '$country', '$gender', '$dob', $age, NOW(),Now())";
+    $reg_query = "INSERT INTO myprofile (FullName, EmailID, MobileNo, Address, State, Country, Gender, DateOfBirth, Age, MembershipStart,created_date)
+    VALUES ('$name', '$email', '$mobile', '$address', '$state', '$country', '$gender', '$dob', $age, NOW(),Now())";
     
-    $login_query = "INSERT INTO users (FullName, EmailID, MobileNo, Address, password) VALUES ('$name', '$email', '$mobile', '$address', '$password')";
-
-// echo $query; die;
-
-if (mysqli_query($connection, $reg_query) && mysqli_query($connection, $login_query)) {
-    echo "<script type='text/javascript'>
-            alert('User Add Successfully..');
-            window.location.href='register_users.php';
-          </script>";
-} else {
-    echo "<script type='text/javascript'>
-            alert('Error: " . mysqli_error($connection) . "');
-            window.location.href='register_user.php';
-          </script>";
-}
+    if (mysqli_query($connection, $reg_query)){
+        $last_id = $connection->insert_id;
+        $login_query = "INSERT INTO users (RegID,FullName, EmailID, MobileNo, Address, password) VALUES ('$last_id','$name', '$email', '$mobile', '$address', '$password')";
+        mysqli_query($connection, $login_query);
+        echo '<script type="text/javascript">
+            alert("Registration Successful.... You may log in now.");
+            window.location.href="register_users.php";
+        </script>';
+    }
+    else {
+        echo "Error: " . mysqli_error($connection);
+    }
 
 // Close the connection
 mysqli_close($connection);
@@ -261,6 +259,7 @@ mysqli_close($connection);
         </div>
 
     </main-section>
+    <?php include "../user_dashboard/footer.php"; ?>
 
     <script>
     function showPassword() {
